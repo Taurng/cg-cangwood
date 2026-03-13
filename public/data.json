@@ -1,138 +1,149 @@
 {
   "products": [
-    { 
-      "id": 1, 
-      "categoryId": "cat_table", 
-      "name_zh": "幾何餐桌", 
-      "name_en": "Geometric Table", 
-      "type_zh": "黑胡桃木", 
-      "type_en": "Black Walnut", 
-      "price": 48000, 
-      "desc_zh": "選用北美黑胡桃木，保留自然邊緣。幾何桌腳設計，結合現代力學與傳統榫接。", 
-      "desc_en": "North American Black Walnut with natural edges. Geometric leg design.", 
-      "stock": "custom", 
+    {
+      "id": 1,
+      "categoryId": "cat_table",
+      "name_zh": "幾何餐桌",
+      "name_en": "Geometric Table",
+      "type_zh": "黑胡桃木",
+      "type_en": "Black Walnut",
+      "price": 48000,
+      "desc_zh": "選用北美黑胡桃木，保留自然邊緣。幾何桌腳設計，結合現代力學與傳統榫接。",
+      "desc_en": "North American Black Walnut with natural edges. Geometric leg design.",
+      "stock": "custom",
       "images": [
-        "https://images.unsplash.com/photo-1611269154421-4e27233eb485?q=80&w=2544&auto=format&fit=crop", 
+        "https://images.unsplash.com/photo-1611269154421-4e27233eb485?q=80&w=2544&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1577140917170-285929fb55b7?q=80&w=2000&auto=format&fit=crop"
-      ] 
+      ]
     },
-    { 
-      "id": 2, 
-      "categoryId": "cat_chair", 
-      "name_zh": "靜謐扶手椅", 
-      "name_en": "Serene Lounge Chair", 
-      "type_zh": "白橡木", 
-      "type_en": "White Oak", 
-      "price": 12500, 
-      "desc_zh": "日式禪風設計，低座面，適合閱讀與冥想。", 
-      "desc_en": "Japanese Zen design, low seat.", 
-      "stock": "instock", 
-      "images": ["https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?q=80&w=2370&auto=format&fit=crop"] 
+    {
+      "id": 3,
+      "categoryId": "cat_cabinet",
+      "name_zh": "時光收納櫃",
+      "name_en": "Timeless Cabinet",
+      "type_zh": "櫻桃木",
+      "type_en": "Cherry Wood",
+      "price": 32000,
+      "desc_zh": "隨著時間推移顏色會逐漸變深的櫻桃木，配有黃銅把手。",
+      "desc_en": "Cherry wood that darkens over time.",
+      "stock": "custom",
+      "images": [
+        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=2487&auto=format&fit=crop"
+      ]
     },
-    { 
-      "id": 3, 
-      "categoryId": "cat_cabinet", 
-      "name_zh": "時光收納櫃", 
-      "name_en": "Timeless Cabinet", 
-      "type_zh": "櫻桃木", 
-      "type_en": "Cherry Wood", 
-      "price": 32000, 
-      "desc_zh": "隨著時間推移顏色會逐漸變深的櫻桃木，配有黃銅把手。", 
-      "desc_en": "Cherry wood that darkens over time.", 
-      "stock": "custom", 
-      "images": ["https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=2487&auto=format&fit=crop"] 
+    {
+      "id": 4,
+      "categoryId": "cat_kitchen",
+      "name_zh": "胡桃木托盤",
+      "name_en": "Walnut Tray",
+      "type_zh": "黑胡桃木",
+      "type_en": "Black Walnut",
+      "price": 2800,
+      "desc_zh": "整塊實木挖空製作，邊緣圓潤，適合做為茶盤。",
+      "desc_en": "Carved from a single piece of solid wood.",
+      "stock": "instock",
+      "images": [
+        "https://images.unsplash.com/photo-1610708940833-25bdcc56eb4b?q=80&w=2500&auto=format&fit=crop"
+      ]
     },
-    { 
-      "id": 4, 
-      "categoryId": "cat_kitchen", 
-      "name_zh": "胡桃木托盤", 
-      "name_en": "Walnut Tray", 
-      "type_zh": "黑胡桃木", 
-      "type_en": "Black Walnut", 
-      "price": 2800, 
-      "desc_zh": "整塊實木挖空製作，邊緣圓潤，適合做為茶盤。", 
-      "desc_en": "Carved from a single piece of solid wood.", 
-      "stock": "instock", 
-      "images": ["https://images.unsplash.com/photo-1610708940833-25bdcc56eb4b?q=80&w=2500&auto=format&fit=crop"] 
+    {
+      "id": 6,
+      "categoryId": "cat_chair",
+      "name_zh": "極簡長凳",
+      "name_en": "Minimal Bench",
+      "type_zh": "橡木",
+      "type_en": "Oak",
+      "price": 15000,
+      "desc_zh": "多功能長凳，可用於玄關穿鞋或餐桌配椅。",
+      "desc_en": "Multi-functional bench.",
+      "stock": "instock",
+      "images": [
+        "https://images.unsplash.com/photo-1556702120-c8cb240974b6?q=80&w=2487&auto=format&fit=crop"
+      ]
+    }
+  ],
+  "woods": [
+    {
+      "id": 1,
+      "name": "Black Walnut",
+      "name_zh": "北美黑胡桃木",
+      "desc_en": "Dark, rich color with large grain. High hardness and excellent stability.",
+      "desc_zh": "色澤深沉，紋理大氣。硬度高，穩定性佳，隨著時間會散發獨特光澤。",
+      "img": "https://images.unsplash.com/photo-1629196911514-cfd8d628b26e?q=80&w=800&auto=format&fit=crop"
     },
-    { 
-      "id": 5, 
-      "categoryId": "cat_table", 
-      "name_zh": "職人書桌", 
-      "name_en": "Artisan Desk", 
-      "type_zh": "全木種訂製", 
-      "type_en": "Custom Wood", 
-      "price": 56000, 
-      "desc_zh": "依照您的空間尺寸與使用習慣量身打造。", 
-      "desc_en": "Tailored to your space and habits.", 
-      "stock": "custom", 
-      "images": ["https://images.unsplash.com/photo-1519219788971-8d9797e0928e?q=80&w=2256&auto=format&fit=crop"] 
+    {
+      "id": 2,
+      "name": "White Oak",
+      "name_zh": "白橡木",
+      "desc_en": "Elegant pale tone with distinct mountain-like grain. Very hard and wear-resistant.",
+      "desc_zh": "色調淡雅，紋理清晰明顯，具有獨特的山形紋。質地堅硬，耐磨損。",
+      "img": "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=800&auto=format&fit=crop"
     },
-    { 
-      "id": 6, 
-      "categoryId": "cat_chair", 
-      "name_zh": "極簡長凳", 
-      "name_en": "Minimal Bench", 
-      "type_zh": "橡木", 
-      "type_en": "Oak", 
-      "price": 15000, 
-      "desc_zh": "多功能長凳，可用於玄關穿鞋或餐桌配椅。", 
-      "desc_en": "Multi-functional bench.", 
-      "stock": "instock", 
-      "images": ["https://images.unsplash.com/photo-1556702120-c8cb240974b6?q=80&w=2487&auto=format&fit=crop"] 
+    {
+      "id": 3,
+      "name": "Cherry Wood",
+      "name_zh": "櫻桃木",
+      "desc_en": "Fine texture with a warm reddish hue. Deepens over time.",
+      "desc_zh": "木質細緻，顏色偏紅暖色調。隨著光照時間增加，顏色會逐漸變深，充滿時間感。",
+      "img": "https://images.unsplash.com/photo-1621262973418-5a0256d0d738?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      "id": 4,
+      "name": "Ash Wood",
+      "name_zh": "梣木 (白蠟木)",
+      "desc_en": "Bold and wild grain, pale white color. Highly elastic.",
+      "desc_zh": "紋理粗獷奔放，顏色淺白。彈性極佳，常用於製作曲線造型家具。",
+      "img": "https://images.unsplash.com/photo-1579294800821-694d95e861d3?q=80&w=800&auto=format&fit=crop"
     }
   ],
   "categories": [
-    { "id": "cat_furniture", "name_zh": "家具系列", "name_en": "Furniture" },
-    { "id": "cat_table", "parentId": "cat_furniture", "name_zh": "桌几", "name_en": "Tables" },
-    { "id": "cat_chair", "parentId": "cat_furniture", "name_zh": "椅凳", "name_en": "Chairs" },
-    { "id": "cat_cabinet", "parentId": "cat_furniture", "name_zh": "櫃架", "name_en": "Cabinets" },
-    { "id": "cat_bed", "parentId": "cat_furniture", "name_zh": "床架", "name_en": "Beds" },
-    { "id": "cat_ornament", "name_zh": "擺件小物", "name_en": "Ornaments" },
-    { "id": "cat_kitchen", "parentId": "cat_ornament", "name_zh": "廚房器皿", "name_en": "Kitchenware" },
-    { "id": "cat_decor", "parentId": "cat_ornament", "name_zh": "居家裝飾", "name_en": "Home Decor" }
-  ],
-  "woods": [
-    { 
-      "id": 1, 
-      "name": "Black Walnut", 
-      "name_zh": "北美黑胡桃木", 
-      "desc_en": "Dark, rich color with large grain. High hardness and excellent stability.", 
-      "desc_zh": "色澤深沉，紋理大氣。硬度高，穩定性佳，隨著時間會散發獨特光澤。", 
-      "img": "https://images.unsplash.com/photo-1629196911514-cfd8d628b26e?q=80&w=800&auto=format&fit=crop" 
+    {
+      "id": "cat_furniture",
+      "name_zh": "家具系列",
+      "name_en": "Furniture"
     },
-    { 
-      "id": 2, 
-      "name": "White Oak", 
-      "name_zh": "白橡木", 
-      "desc_en": "Elegant pale tone with distinct mountain-like grain. Very hard and wear-resistant.", 
-      "desc_zh": "色調淡雅，紋理清晰明顯，具有獨特的山形紋。質地堅硬，耐磨損。", 
-      "img": "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=800&auto=format&fit=crop" 
+    {
+      "id": "cat_table",
+      "parentId": "cat_furniture",
+      "name_zh": "桌几",
+      "name_en": "Tables"
     },
-    { 
-      "id": 3, 
-      "name": "Cherry Wood", 
-      "name_zh": "櫻桃木", 
-      "desc_en": "Fine texture with a warm reddish hue. Deepens over time.", 
-      "desc_zh": "木質細緻，顏色偏紅暖色調。隨著光照時間增加，顏色會逐漸變深，充滿時間感。", 
-      "img": "https://images.unsplash.com/photo-1621262973418-5a0256d0d738?q=80&w=800&auto=format&fit=crop" 
+    {
+      "id": "cat_chair",
+      "parentId": "cat_furniture",
+      "name_zh": "椅凳",
+      "name_en": "Chairs"
     },
-    { 
-      "id": 4, 
-      "name": "Ash Wood", 
-      "name_zh": "梣木 (白蠟木)", 
-      "desc_en": "Bold and wild grain, pale white color. Highly elastic.", 
-      "desc_zh": "紋理粗獷奔放，顏色淺白。彈性極佳，常用於製作曲線造型家具。", 
-      "img": "https://images.unsplash.com/photo-1579294800821-694d95e861d3?q=80&w=800&auto=format&fit=crop" 
+    {
+      "id": "cat_cabinet",
+      "parentId": "cat_furniture",
+      "name_zh": "櫃架",
+      "name_en": "Cabinets"
+    },
+    {
+      "id": "cat_bed",
+      "parentId": "cat_furniture",
+      "name_zh": "床架",
+      "name_en": "Beds"
+    },
+    {
+      "id": "cat_ornament",
+      "name_zh": "擺件小物",
+      "name_en": "Ornaments"
+    },
+    {
+      "id": "cat_kitchen",
+      "parentId": "cat_ornament",
+      "name_zh": "廚房器皿",
+      "name_en": "Kitchenware"
+    },
+    {
+      "id": "cat_decor",
+      "parentId": "cat_ornament",
+      "name_zh": "居家裝飾",
+      "name_en": "Home Decor"
     }
   ],
-  "homeImages": {
-    "hero_bg": "https://picsum.photos/seed/vibrant/1920/1080?blur=4",
-    "hero_main": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2158&auto=format&fit=crop",
-    "mission_img": "https://picsum.photos/seed/woodworking/1200/1600",
-    "nav_shop_img": "https://picsum.photos/seed/furniture/800/1000",
-    "nav_wood_img": "https://picsum.photos/seed/wood/800/1000"
-  },
   "i18nData": {
     "zh": {
       "subtitle": "[ 鑶器木居工作室 ]",
@@ -240,5 +251,12 @@
       "admin_views": "Views",
       "admin_change_img": "Change Images"
     }
+  },
+  "homeImages": {
+    "hero_bg": "https://picsum.photos/seed/vibrant/1920/1080?blur=4",
+    "hero_main": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2158&auto=format&fit=crop",
+    "mission_img": "https://picsum.photos/seed/woodworking/1200/1600",
+    "nav_shop_img": "https://picsum.photos/seed/furniture/800/1000",
+    "nav_wood_img": "https://picsum.photos/seed/wood/800/1000"
   }
 }
