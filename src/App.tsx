@@ -24,11 +24,46 @@ export default function App() {
   const [isAIButlerOpen, setIsAIButlerOpen] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
   
-  const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
-  const [woods, setWoods] = useState<Wood[]>(INITIAL_WOODS);
-  const [categories, setCategories] = useState<Category[]>(INITIAL_CATEGORIES);
-  const [i18nData, setI18nData] = useState(I18N);
-  const [homeImages, setHomeImages] = useState(INITIAL_HOME_IMAGES);
+  const [products, setProducts] = useState<Product[]>(() => {
+    const saved = localStorage.getItem('camg_products');
+    return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
+  });
+  const [woods, setWoods] = useState<Wood[]>(() => {
+    const saved = localStorage.getItem('camg_woods');
+    return saved ? JSON.parse(saved) : INITIAL_WOODS;
+  });
+  const [categories, setCategories] = useState<Category[]>(() => {
+    const saved = localStorage.getItem('camg_categories');
+    return saved ? JSON.parse(saved) : INITIAL_CATEGORIES;
+  });
+  const [i18nData, setI18nData] = useState(() => {
+    const saved = localStorage.getItem('camg_i18n');
+    return saved ? JSON.parse(saved) : I18N;
+  });
+  const [homeImages, setHomeImages] = useState(() => {
+    const saved = localStorage.getItem('camg_homeImages');
+    return saved ? JSON.parse(saved) : INITIAL_HOME_IMAGES;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('camg_products', JSON.stringify(products));
+  }, [products]);
+
+  useEffect(() => {
+    localStorage.setItem('camg_woods', JSON.stringify(woods));
+  }, [woods]);
+
+  useEffect(() => {
+    localStorage.setItem('camg_categories', JSON.stringify(categories));
+  }, [categories]);
+
+  useEffect(() => {
+    localStorage.setItem('camg_i18n', JSON.stringify(i18nData));
+  }, [i18nData]);
+
+  useEffect(() => {
+    localStorage.setItem('camg_homeImages', JSON.stringify(homeImages));
+  }, [homeImages]);
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [confirmedOrder, setConfirmedOrder] = useState<{ orderId: string, product: Product } | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
