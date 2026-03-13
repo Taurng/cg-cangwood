@@ -6,7 +6,6 @@ import { Hero } from './components/Hero';
 import { ProductCard } from './components/ProductCard';
 import { WoodCard } from './components/WoodCard';
 import { ProductModal } from './components/ProductModal';
-import { AIButler } from './components/AIButler';
 import { AdminPanel } from './components/AdminPanel';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { LandingPage } from './components/LandingPage';
@@ -21,7 +20,6 @@ export default function App() {
   const [view, setView] = useState<'home' | 'shop' | 'wood'>('home');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
-  const [isAIButlerOpen, setIsAIButlerOpen] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
   
   const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
@@ -249,7 +247,6 @@ export default function App() {
             lang={lang} 
             setLang={setLang} 
             setView={setView} 
-            onOpenAI={() => setIsAIButlerOpen(true)} 
             cartCount={cart.reduce((sum, i) => sum + i.quantity, 0)}
             onOpenCart={() => setIsCartOpen(true)}
             onOpenAdmin={() => setIsAdminOpen(true)}
@@ -270,7 +267,7 @@ export default function App() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <Hero lang={lang} setView={setView} onOpenAI={() => setIsAIButlerOpen(true)} images={homeImages} />
+                <Hero lang={lang} setView={setView} images={homeImages} />
                 
                 {/* Marquee */}
                 <div className="w-full border-b border-brand-black bg-brand-black text-brand-white py-4 font-mono text-[10px] uppercase overflow-hidden">
@@ -393,7 +390,7 @@ export default function App() {
 
                 <footer className="px-6 md:px-12 pb-12 font-mono text-[10px] md:text-xs flex flex-col md:flex-row justify-between items-center gap-8 text-brand-darkgray border-t border-brand-black/10 pt-12">
                   <div className="flex gap-8 uppercase tracking-widest">
-                    <a href="https://www.instagram.com/cmu_uts_wd_sor?igsh=NnJ1bWxvdHZlcjBu" target="_blank" rel="noopener noreferrer" className="hover-underline flex items-center gap-2">
+                    <a href="https://www.instagram.com/cang_wood_2026?igsh=NnJ1bWxvdHZlcjBu" target="_blank" rel="noopener noreferrer" className="hover-underline flex items-center gap-2">
                       <Instagram className="w-4 h-4" /> Instagram
                     </a>
                     <a href="https://lin.ee/FUUvJlG" target="_blank" rel="noopener noreferrer" className="hover-underline flex items-center gap-2">
@@ -504,8 +501,6 @@ export default function App() {
             onCheckout={handleCartCheckout}
             lang={lang}
           />
-
-          <AIButler isOpen={isAIButlerOpen} setIsOpen={setIsAIButlerOpen} />
 
           {confirmedOrder && (
             <OrderConfirmationModal 

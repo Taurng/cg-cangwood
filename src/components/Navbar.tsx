@@ -9,12 +9,11 @@ type NavbarProps = {
   setLang: (lang: Language) => void;
   setView: (view: 'home' | 'shop' | 'wood') => void;
   onOpenAdmin: () => void;
-  onOpenAI: () => void;
   cartCount: number;
   onOpenCart: () => void;
 };
 
-export function Navbar({ lang, setLang, setView, onOpenAdmin, onOpenAI, cartCount, onOpenCart }: NavbarProps) {
+export function Navbar({ lang, setLang, setView, onOpenAdmin, cartCount, onOpenCart }: NavbarProps) {
   const t = I18N[lang];
   const [scrolled, setScrolled] = useState(false);
 
