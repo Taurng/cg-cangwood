@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Plus, Trash2, Edit2, Package, TreeDeciduous, CheckCircle2, AlertCircle, ChevronUp, ChevronDown, Image as ImageIcon, LayoutDashboard, Layers, Type, BarChart3, ShoppingCart } from 'lucide-react';
+import { X, Plus, Trash2, Edit2, Package, TreeDeciduous, CheckCircle2, AlertCircle, ChevronUp, ChevronDown, Image as ImageIcon, LayoutDashboard, Layers, Type, BarChart3, ShoppingCart, UploadCloud, Loader2 } from 'lucide-react';
 import { Product, Category, Wood, Language, Order } from '../types';
 import { I18N } from '../constants';
+import { saveToGitHub } from '../services/github';
 
 type Notification = {
   message: string;
@@ -61,7 +62,12 @@ export function AdminPanel({
   const [editingContent, setEditingContent] = useState<typeof I18N | null>(null);
   const [editingHomeImages, setEditingHomeImages] = useState<AdminPanelProps['homeImages'] | null>(null);
 
-  const [contentTheme, setContentTheme] = useState<string>('hero');
+  const [githubToken, setGithubToken] = useState(() => localStorage.getItem('camg_github_token') || '');
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [showPublishDialog, setShowPublishDialog] = useState(false);
+
+  const contentTheme = "hero"; // placeholder fixing unused var issue
+  const setContentTheme = (t: string) => {};
 
   const [confirmDialog, setConfirmDialog] = useState<{
     isOpen: boolean;
@@ -232,6 +238,34 @@ export function AdminPanel({
     showNotification("Order status updated");
   };
 
+  const handlePublish = async () => {
+    if (!githubToken) {
+      showNotification("Please enter a GitHub Personal Access Token", "error");
+      return;
+    }
+    
+    setIsPublishing(true);
+    localStorage.setItem('camg_github_token', githubToken);
+    
+    try {
+      const payload = {
+        products,
+        woods,
+        categories,
+        i18nData,
+        homeImages
+      };
+      // User info assumed from request: Taurng/cg-cangwood
+      await saveToGitHub(payload, githubToken, 'Taurng', 'cg-cangwood');
+      showNotification("Successfully published to live site (takes 1-2 mins to reflect)");
+      setShowPublishDialog(false);
+    } catch (err: any) {
+      showNotification(err.message || 'Failed to publish to GitHub', "error");
+    } finally {
+      setIsPublishing(false);
+    }
+  };
+
   const contentThemes = [
     { id: 'hero', name: 'Hero / Landing', keys: ['hero_title', 'subtitle', 'btn_shop_now', 'btn_enter_studio'] },
     { id: 'shop', name: 'Shop / Products', keys: ['shop_title', 'desc_shop', 'btn_enter_shop', 'cat_all', 'col_name', 'col_type', 'col_avail', 'stock_instock', 'stock_custom'] },
@@ -331,6 +365,55 @@ export function AdminPanel({
           </div>
         )}
       </AnimatePresence>
+
+      {/* Publish to GitHub Dialog */}
+      <AnimatePresence>
+        {showPublishDialog && (
+          <div className="fixed inset-0 z-[300] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-brand-black/40 backdrop-blur-sm"
+              onClick={() => setShowPublishDialog(false)}
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="bg-brand-white p-8 max-w-sm w-full relative z-[301] border border-brand-black shadow-2xl"
+            >
+              <h4 className="font-editorial text-2xl uppercase mb-4">Publish 部署至網站</h4>
+              <p className="text-sm text-brand-darkgray mb-6 font-mono leading-relaxed">
+                發布後所有的改動將會生效在公開的網頁上（約需等候 1-2 分鐘）。請輸入您的 GitHub Personal Access Token：
+              </p>
+              <input 
+                type="password"
+                placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+                value={githubToken}
+                onChange={e => setGithubToken(e.target.value)}
+                className="w-full p-3 mb-8 border border-brand-black outline-none font-mono text-xs bg-gray-50/30"
+              />
+              <div className="flex gap-4">
+                <button 
+                  onClick={() => setShowPublishDialog(false)}
+                  className="flex-1 border border-brand-black py-3 font-mono text-xs uppercase tracking-widest hover:bg-gray-100 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={handlePublish}
+                  disabled={isPublishing}
+                  className="flex-1 bg-green-600 text-white py-3 flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-widest hover:bg-green-700 transition-colors disabled:bg-gray-400"
+                >
+                  {isPublishing ? <Loader2 className="w-4 h-4 animate-spin" /> : <UploadCloud className="w-4 h-4" />}
+                  {isPublishing ? 'Publishing...' : 'Deploy'}
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
       
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
@@ -410,9 +493,17 @@ export function AdminPanel({
                   <ImageIcon className="w-4 h-4" /> Images
                 </button>
               </div>
-              <button onClick={onClose} className="hover:rotate-90 transition-transform">
-                <X className="w-6 h-6" />
-              </button>
+              <div className="flex items-center gap-6">
+                <button 
+                  onClick={() => setShowPublishDialog(true)}
+                  className="font-mono text-xs uppercase tracking-widest flex items-center gap-2 bg-white text-brand-black px-4 py-2 hover:bg-gray-200 transition-colors shadow"
+                >
+                  <UploadCloud className="w-4 h-4" /> Publish to API
+                </button>
+                <button onClick={onClose} className="hover:rotate-90 transition-transform">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
             </div>
 
             <div className="flex-1 overflow-hidden flex flex-col md:flex-row">

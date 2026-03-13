@@ -12,7 +12,7 @@ import { MobileBottomNav } from './components/MobileBottomNav';
 import { LandingPage } from './components/LandingPage';
 import { OrderConfirmationModal } from './components/OrderConfirmationModal';
 import { CartModal } from './components/CartModal';
-import { INITIAL_CATEGORIES, INITIAL_PRODUCTS, INITIAL_WOODS, I18N, INITIAL_HOME_IMAGES } from './constants';
+import { INITIAL_PRODUCTS, INITIAL_WOODS, INITIAL_CATEGORIES, I18N, INITIAL_HOME_IMAGES } from './constants';
 import { Language, Product, Wood, Category, CartItem, Order } from './types';
 import { Instagram, MessageCircle, ArrowRight } from 'lucide-react';
 
@@ -24,46 +24,69 @@ export default function App() {
   const [isAIButlerOpen, setIsAIButlerOpen] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
   
-  const [products, setProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('camg_products');
-    return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
-  });
-  const [woods, setWoods] = useState<Wood[]>(() => {
-    const saved = localStorage.getItem('camg_woods');
-    return saved ? JSON.parse(saved) : INITIAL_WOODS;
-  });
-  const [categories, setCategories] = useState<Category[]>(() => {
-    const saved = localStorage.getItem('camg_categories');
-    return saved ? JSON.parse(saved) : INITIAL_CATEGORIES;
-  });
-  const [i18nData, setI18nData] = useState(() => {
-    const saved = localStorage.getItem('camg_i18n');
-    return saved ? JSON.parse(saved) : I18N;
-  });
-  const [homeImages, setHomeImages] = useState(() => {
-    const saved = localStorage.getItem('camg_homeImages');
-    return saved ? JSON.parse(saved) : INITIAL_HOME_IMAGES;
-  });
+  const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
+  const [woods, setWoods] = useState<Wood[]>(INITIAL_WOODS);
+  const [categories, setCategories] = useState<Category[]>(INITIAL_CATEGORIES);
+  const [i18nData, setI18nData] = useState(I18N);
+  const [homeImages, setHomeImages] = useState(INITIAL_HOME_IMAGES);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
+    // Fetch live data from data.json
+    fetch('/cg-cangwood/data.json?t=' + Date.now())
+      .then(res => {
+        if (!res.ok) throw new Error('data.json not found');
+        return res.json();
+      })
+      .then(data => {
+        if (data.products) setProducts(data.products);
+        if (data.woods) setWoods(data.woods);
+        if (data.categories) setCategories(data.categories);
+        if (data.i18nData) setI18nData(data.i18nData);
+        if (data.homeImages) setHomeImages(data.homeImages);
+        setIsDataLoaded(true);
+      })
+      .catch(err => {
+        console.error('Failed to load live data, falling back to locals/constants:', err);
+        const p = localStorage.getItem('camg_products');
+        if (p) setProducts(JSON.parse(p));
+        const w = localStorage.getItem('camg_woods');
+        if (w) setWoods(JSON.parse(w));
+        const c = localStorage.getItem('camg_categories');
+        if (c) setCategories(JSON.parse(c));
+        const i = localStorage.getItem('camg_i18n');
+        if (i) setI18nData(JSON.parse(i));
+        const h = localStorage.getItem('camg_homeImages');
+        if (h) setHomeImages(JSON.parse(h));
+        setIsDataLoaded(true);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (!isDataLoaded) return;
     localStorage.setItem('camg_products', JSON.stringify(products));
-  }, [products]);
+  }, [products, isDataLoaded]);
 
   useEffect(() => {
+    if (!isDataLoaded) return;
     localStorage.setItem('camg_woods', JSON.stringify(woods));
-  }, [woods]);
+  }, [woods, isDataLoaded]);
 
   useEffect(() => {
+    if (!isDataLoaded) return;
     localStorage.setItem('camg_categories', JSON.stringify(categories));
-  }, [categories]);
+  }, [categories, isDataLoaded]);
 
   useEffect(() => {
+    if (!isDataLoaded) return;
     localStorage.setItem('camg_i18n', JSON.stringify(i18nData));
-  }, [i18nData]);
+  }, [i18nData, isDataLoaded]);
 
   useEffect(() => {
+    if (!isDataLoaded) return;
     localStorage.setItem('camg_homeImages', JSON.stringify(homeImages));
-  }, [homeImages]);
+  }, [homeImages, isDataLoaded]);
+
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [confirmedOrder, setConfirmedOrder] = useState<{ orderId: string, product: Product } | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -71,7 +94,7 @@ export default function App() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [viewCount, setViewCount] = useState(0);
 
-  const t = i18nData[lang];
+  const t = i18nData[lang] || I18N['zh'];
 
   useEffect(() => {
     // Simulate view count increment
