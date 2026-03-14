@@ -3,11 +3,11 @@
     {
       "id": 1,
       "categoryId": "cat_table",
-      "name_zh": "幾何餐桌",
-      "name_en": "Geometric Table",
-      "type_zh": "黑胡桃木",
+      "name_zh": "邊桌fo(甜甜圈燈)",
+      "name_en": "Aesthetic Donut Lamp Table",
+      "type_zh": "黑胡桃木、黃銅、茶色玻璃",
       "type_en": "Black Walnut",
-      "price": 48000,
+      "price": 12000,
       "desc_zh": "選用北美黑胡桃木，保留自然邊緣。幾何桌腳設計，結合現代力學與傳統榫接。",
       "desc_en": "North American Black Walnut with natural edges. Geometric leg design.",
       "stock": "custom",
@@ -18,12 +18,12 @@
     },
     {
       "id": 3,
-      "categoryId": "cat_cabinet",
-      "name_zh": "時光收納櫃",
-      "name_en": "Timeless Cabinet",
-      "type_zh": "櫻桃木",
+      "categoryId": "cat_chair",
+      "name_zh": "長椅",
+      "name_en": "Dining Bench",
+      "type_zh": "黑胡桃木",
       "type_en": "Cherry Wood",
-      "price": 32000,
+      "price": 35000,
       "desc_zh": "隨著時間推移顏色會逐漸變深的櫻桃木，配有黃銅把手。",
       "desc_en": "Cherry wood that darkens over time.",
       "stock": "custom",
@@ -38,10 +38,10 @@
       "name_en": "Walnut Tray",
       "type_zh": "黑胡桃木",
       "type_en": "Black Walnut",
-      "price": 2800,
+      "price": 4500,
       "desc_zh": "整塊實木挖空製作，邊緣圓潤，適合做為茶盤。",
       "desc_en": "Carved from a single piece of solid wood.",
-      "stock": "instock",
+      "stock": "custom",
       "images": [
         "https://images.unsplash.com/photo-1610708940833-25bdcc56eb4b?q=80&w=2500&auto=format&fit=crop"
       ]
@@ -53,10 +53,10 @@
       "name_en": "Minimal Bench",
       "type_zh": "橡木",
       "type_en": "Oak",
-      "price": 15000,
+      "price": 45000,
       "desc_zh": "多功能長凳，可用於玄關穿鞋或餐桌配椅。",
       "desc_en": "Multi-functional bench.",
-      "stock": "instock",
+      "stock": "custom",
       "images": [
         "https://images.unsplash.com/photo-1556702120-c8cb240974b6?q=80&w=2487&auto=format&fit=crop"
       ]
@@ -117,14 +117,8 @@
     {
       "id": "cat_cabinet",
       "parentId": "cat_furniture",
-      "name_zh": "櫃架",
+      "name_zh": "櫃櫃",
       "name_en": "Cabinets"
-    },
-    {
-      "id": "cat_bed",
-      "parentId": "cat_furniture",
-      "name_zh": "床架",
-      "name_en": "Beds"
     },
     {
       "id": "cat_ornament",
@@ -132,16 +126,22 @@
       "name_en": "Ornaments"
     },
     {
-      "id": "cat_kitchen",
-      "parentId": "cat_ornament",
-      "name_zh": "廚房器皿",
-      "name_en": "Kitchenware"
-    },
-    {
       "id": "cat_decor",
       "parentId": "cat_ornament",
-      "name_zh": "居家裝飾",
-      "name_en": "Home Decor"
+      "name_zh": "品牌動物精靈系列",
+      "name_en": "Branded Animal Elf Series"
+    },
+    {
+      "id": "cat_bed",
+      "parentId": "cat_ornament",
+      "name_zh": "花器系列",
+      "name_en": " Vase"
+    },
+    {
+      "id": "cat_kitchen",
+      "parentId": "cat_ornament",
+      "name_zh": "器皿系列",
+      "name_en": "Utensils"
     }
   ],
   "i18nData": {
@@ -198,7 +198,7 @@
       "admin_change_img": "更換圖片"
     },
     "en": {
-      "subtitle": "[ CAMG WOOD STUDIO ]",
+      "subtitle": "[ CANG WOOD STUDIO ]",
       "desc1": "Wood as a vessel for life.",
       "desc2": "We specialize in structural research and bespoke solid wood furniture.",
       "status": "Open for Orders",
