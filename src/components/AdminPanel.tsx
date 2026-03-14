@@ -4,6 +4,7 @@ import { X, Plus, Trash2, Edit2, Package, TreeDeciduous, CheckCircle2, AlertCirc
 import { Product, Category, Wood, Language, Order } from '../types';
 import { I18N } from '../constants';
 import { saveToGitHub } from '../services/github';
+import { ImageUploader } from './ImageUploader';
 
 type Notification = {
   message: string;
@@ -729,44 +730,31 @@ export function AdminPanel({
 
                       <div className="space-y-4">
                         <div className="flex justify-between items-center">
-                          <label className="font-mono text-[10px] uppercase text-brand-darkgray font-semibold tracking-wider">Images (URLs)</label>
+                          <label className="font-mono text-[10px] uppercase text-brand-darkgray font-semibold tracking-wider">Images</label>
                           <button 
                             onClick={() => setEditingProduct({...editingProduct, images: [...(editingProduct.images || []), ""]})}
-                            className="text-brand-black hover:text-blue-500 transition-colors p-1"
+                            className="bg-brand-black text-white font-mono text-[9px] uppercase tracking-widest px-3 py-1.5 hover:bg-brand-darkgray transition-colors"
                           >
-                            <Plus className="w-4 h-4" />
+                            + Add Image Slot
                           </button>
                         </div>
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                           {(editingProduct.images || []).map((img, i) => (
-                            <div key={i} className="flex gap-2 group/img">
-                              <div className="flex-1 relative">
-                                <input 
-                                  value={img}
-                                  onChange={e => {
-                                    const newImgs = [...(editingProduct.images || [])];
-                                    newImgs[i] = e.target.value;
-                                    setEditingProduct({...editingProduct, images: newImgs});
-                                  }}
-                                  placeholder="https://..."
-                                  className="w-full p-3 border border-brand-black/20 focus:border-brand-black outline-none font-mono text-[10px] bg-gray-50/30 transition-colors"
-                                />
-                                {img && (
-                                  <div className="absolute right-3 top-1/2 -translate-y-1/2 opacity-0 group-hover/img:opacity-100 transition-opacity">
-                                    <img src={img} className="w-6 h-6 object-cover border border-brand-black/10" alt="" referrerPolicy="no-referrer" />
-                                  </div>
-                                )}
-                              </div>
-                              <button 
-                                onClick={() => {
-                                  const newImgs = (editingProduct.images || []).filter((_, idx) => idx !== i);
-                                  setEditingProduct({...editingProduct, images: newImgs});
-                                }}
-                                className="p-3 text-red-500 hover:bg-red-50 transition-colors border border-brand-black/10 hover:border-red-500"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </button>
-                            </div>
+                            <ImageUploader
+                              key={i}
+                              currentImageUrl={img}
+                              githubToken={githubToken}
+                              label={`Product Image ${i + 1}`}
+                              onUploadSuccess={(url) => {
+                                const newImgs = [...(editingProduct.images || [])];
+                                newImgs[i] = url;
+                                setEditingProduct({...editingProduct, images: newImgs});
+                              }}
+                              onClear={() => {
+                                const newImgs = (editingProduct.images || []).filter((_, idx) => idx !== i);
+                                setEditingProduct({...editingProduct, images: newImgs});
+                              }}
+                            />
                           ))}
                         </div>
                       </div>
@@ -885,11 +873,13 @@ export function AdminPanel({
                       </div>
 
                       <div className="space-y-2">
-                        <label className="font-mono text-[10px] uppercase text-brand-darkgray font-semibold tracking-wider">Image URL</label>
-                        <input 
-                          value={editingWood.img || ""}
-                          onChange={e => setEditingWood({...editingWood, img: e.target.value})}
-                          className="w-full p-3 border border-brand-black/20 focus:border-brand-black outline-none font-mono text-xs bg-gray-50/30 transition-colors"
+                        <label className="font-mono text-[10px] uppercase text-brand-darkgray font-semibold tracking-wider">Wood Preview</label>
+                        <ImageUploader
+                          currentImageUrl={editingWood.img}
+                          githubToken={githubToken}
+                          label="Wood Texture/Image"
+                          onUploadSuccess={(url) => setEditingWood({...editingWood, img: url})}
+                          onClear={() => setEditingWood({...editingWood, img: undefined})}
                         />
                       </div>
 
@@ -1100,18 +1090,13 @@ export function AdminPanel({
                             <label className="font-mono text-[10px] uppercase text-brand-darkgray font-semibold tracking-wider">
                               {key.replace(/_/g, ' ')}
                             </label>
-                            <div className="flex gap-4">
-                              <input 
-                                value={value}
-                                onChange={e => setEditingHomeImages({...editingHomeImages, [key]: e.target.value})}
-                                className="flex-1 p-3 border border-brand-black/20 focus:border-brand-black outline-none font-mono text-xs bg-gray-50/30 transition-colors"
-                              />
-                              {value && (
-                                <div className="w-12 h-12 border border-brand-black/10 overflow-hidden flex-shrink-0">
-                                  <img src={value} className="w-full h-full object-cover" alt="" referrerPolicy="no-referrer" />
-                                </div>
-                              )}
-                            </div>
+                            <ImageUploader
+                              currentImageUrl={value as string}
+                              githubToken={githubToken}
+                              label={`Upload ${key.replace(/_/g, ' ')}`}
+                              onUploadSuccess={(url) => setEditingHomeImages({...editingHomeImages, [key]: url})}
+                              onClear={() => setEditingHomeImages({...editingHomeImages, [key]: ''})}
+                            />
                           </div>
                         ))}
                       </div>

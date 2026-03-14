@@ -51,3 +51,46 @@ export async function saveToGitHub(data: any, token: string, owner: string, repo
     throw error;
   }
 }
+
+export async function uploadImageToGitHub(fileBytes: Uint8Array, filename: string, token: string, owner: string, repo: string) {
+  try {
+    const timestamp = Date.now();
+    const safeFilename = filename.replace(/[^a-zA-Z0-9.\-_]/g, '_');
+    const path = `public/uploads/img_${timestamp}_${safeFilename}`;
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+    // Convert Uint8Array to Base64
+    let binary = '';
+    const bytes = new Uint8Array(fileBytes);
+    const len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    const base64Content = btoa(binary);
+
+    const putRes = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: `Upload image: ${safeFilename}`,
+        content: base64Content,
+        branch: 'main'
+      })
+    });
+
+    if (!putRes.ok) {
+      const errTxt = await putRes.text();
+      throw new Error(`Failed to upload image. Output: ${errTxt}`);
+    }
+
+    // Return the jsdelivr CDN URL or raw github URL to bypass caching/waiting for GH Pages build
+    return `https://raw.githubusercontent.com/${owner}/${repo}/main/${path}`;
+  } catch (error) {
+    console.error('GitHub API Image Upload Error:', error);
+    throw error;
+  }
+}
