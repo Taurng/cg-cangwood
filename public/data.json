@@ -65,35 +65,55 @@
   "woods": [
     {
       "id": 1,
-      "name": "Black Walnut",
-      "name_zh": "北美黑胡桃木",
+      "name": "Black Walnut-(WN)",
+      "name_zh": "北美黑胡桃木-(WN)",
       "desc_en": "Dark, rich color with large grain. High hardness and excellent stability.",
       "desc_zh": "色澤深沉，紋理大氣。硬度高，穩定性佳，隨著時間會散發獨特光澤。",
       "img": "https://images.unsplash.com/photo-1629196911514-cfd8d628b26e?q=80&w=800&auto=format&fit=crop"
     },
     {
       "id": 2,
-      "name": "White Oak",
-      "name_zh": "白橡木",
+      "name": "White Oak-(OK)",
+      "name_zh": "白橡木-(OK)",
       "desc_en": "Elegant pale tone with distinct mountain-like grain. Very hard and wear-resistant.",
       "desc_zh": "色調淡雅，紋理清晰明顯，具有獨特的山形紋。質地堅硬，耐磨損。",
       "img": "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=800&auto=format&fit=crop"
     },
     {
       "id": 3,
-      "name": "Cherry Wood",
-      "name_zh": "櫻桃木",
+      "name": "Mahogany-(MH)",
+      "name_zh": "桃花心木-(MH)",
       "desc_en": "Fine texture with a warm reddish hue. Deepens over time.",
       "desc_zh": "木質細緻，顏色偏紅暖色調。隨著光照時間增加，顏色會逐漸變深，充滿時間感。",
       "img": "https://images.unsplash.com/photo-1621262973418-5a0256d0d738?q=80&w=800&auto=format&fit=crop"
     },
     {
       "id": 4,
-      "name": "Ash Wood",
-      "name_zh": "梣木 (白蠟木)",
+      "name": "Ash-(AS)",
+      "name_zh": "栓木-(AS)",
       "desc_en": "Bold and wild grain, pale white color. Highly elastic.",
       "desc_zh": "紋理粗獷奔放，顏色淺白。彈性極佳，常用於製作曲線造型家具。",
       "img": "https://images.unsplash.com/photo-1579294800821-694d95e861d3?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      "name_zh": "楓木-(MP)",
+      "name": "Maple-(MP)",
+      "id": 5
+    },
+    {
+      "name_zh": "非洲柚木-(TK)",
+      "name": "Iroko-(TK)",
+      "id": 6
+    },
+    {
+      "name_zh": "山毛櫸-(BE)",
+      "name": "Beech-(BE)",
+      "id": 7
+    },
+    {
+      "name_zh": "紅酸枝木-(RW)",
+      "name": "Rosewood-(RW)",
+      "id": 8
     }
   ],
   "categories": [
