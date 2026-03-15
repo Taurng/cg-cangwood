@@ -7,14 +7,13 @@ import { I18N } from '../constants';
 type HeroProps = {
   lang: Language;
   setView: (view: 'home' | 'shop' | 'wood') => void;
-  onOpenAI: () => void;
   images: {
     hero_bg: string;
     hero_main: string;
   };
 };
 
-export function Hero({ lang, setView, onOpenAI, images }: HeroProps) {
+export function Hero({ lang, setView, images }: HeroProps) {
   const t = I18N[lang];
 
   return (
@@ -107,13 +106,6 @@ export function Hero({ lang, setView, onOpenAI, images }: HeroProps) {
                 <span className="w-10 h-[1px] bg-brand-black group-hover:w-16 transition-all" />
                 {t.btn_shop_now}
               </a>
-              <button 
-                onClick={onOpenAI}
-                className="group flex items-center gap-4 font-mono text-xs uppercase tracking-widest hover:opacity-60 transition-opacity"
-              >
-                <span className="w-10 h-[1px] bg-brand-black group-hover:w-16 transition-all" />
-                {t.btn_ai}
-              </button>
             </div>
           </motion.div>
           

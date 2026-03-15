@@ -67,8 +67,7 @@ export function AdminPanel({
   const [isPublishing, setIsPublishing] = useState(false);
   const [showPublishDialog, setShowPublishDialog] = useState(false);
 
-  const contentTheme = "hero"; // placeholder fixing unused var issue
-  const setContentTheme = (t: string) => {};
+  const [contentTheme, setContentTheme] = useState<string>("hero");
 
   const [confirmDialog, setConfirmDialog] = useState<{
     isOpen: boolean;

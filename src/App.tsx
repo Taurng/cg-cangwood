@@ -9,7 +9,6 @@ import { ProductModal } from './components/ProductModal';
 import { AdminPanel } from './components/AdminPanel';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { LandingPage } from './components/LandingPage';
-import { OrderConfirmationModal } from './components/OrderConfirmationModal';
 import { CartModal } from './components/CartModal';
 import { INITIAL_PRODUCTS, INITIAL_WOODS, INITIAL_CATEGORIES, I18N, INITIAL_HOME_IMAGES } from './constants';
 import { Language, Product, Wood, Category, CartItem, Order } from './types';
@@ -56,6 +55,10 @@ export default function App() {
         if (i) setI18nData(JSON.parse(i));
         const h = localStorage.getItem('camg_homeImages');
         if (h) setHomeImages(JSON.parse(h));
+        const o = localStorage.getItem('camg_orders');
+        if (o) setOrders(JSON.parse(o));
+        const v = localStorage.getItem('viewCount');
+        if (v) setViewCount(parseInt(v));
         setIsDataLoaded(true);
       });
   }, []);
@@ -86,11 +89,15 @@ export default function App() {
   }, [homeImages, isDataLoaded]);
 
   const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [confirmedOrder, setConfirmedOrder] = useState<{ orderId: string, product: Product } | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
   const [viewCount, setViewCount] = useState(0);
+
+  useEffect(() => {
+    if (!isDataLoaded) return;
+    localStorage.setItem('camg_orders', JSON.stringify(orders));
+  }, [orders, isDataLoaded]);
 
   const t = i18nData[lang] || I18N['zh'];
 
@@ -148,12 +155,6 @@ export default function App() {
 
   const handleCheckoutLine = (product: Product) => {
     const orderId = `ORD-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
-    setConfirmedOrder({ orderId, product });
-  };
-
-  const handleFinalConfirm = () => {
-    if (!confirmedOrder) return;
-    const { orderId, product } = confirmedOrder;
     
     // Create actual order record
     const newOrder: Order = {
@@ -169,12 +170,11 @@ export default function App() {
     setOrders(prev => [newOrder, ...prev]);
 
     const message = (lang === 'zh' ? 
-      `您好，我想確認以下最終訂單並進行付款：\n訂單編號：${orderId}\n產品編號：${product.id}\n產品名稱：${product.name_zh}\n總計金額：NT$ ${product.price.toLocaleString()}` :
-      `Hello, I would like to confirm the following final order and proceed with payment:\nOrder ID: ${orderId}\nProduct ID: ${product.id}\nProduct Name: ${product.name_en}\nTotal Amount: NT$ ${product.price.toLocaleString()}`
+      `您好，我想購買此商品並進行付款：\n\n【訂單編號】${orderId}\n【產品編號】${product.id}\n【產品名稱】${product.name_zh}\n【總計金額】NT$ ${product.price.toLocaleString()}` :
+      `Hello, I would like to purchase this item and proceed with payment:\n\n[Order ID] ${orderId}\n[Product ID] ${product.id}\n[Product Name] ${product.name_en}\n[Total Amount] NT$ ${product.price.toLocaleString()}`
     );
     const lineUrl = `https://line.me/R/oaMessage/@FUUvJlG/?${encodeURIComponent(message)}`;
     window.open(lineUrl, '_blank');
-    setConfirmedOrder(null);
     setSelectedProduct(null);
   };
 
@@ -222,7 +222,7 @@ export default function App() {
     setOrders(prev => [newOrder, ...prev]);
 
     const itemsStr = cart.map(item => `${item.product.name_zh} x ${item.quantity}`).join('\n');
-    const message = `您好，我想確認以下購物車訂單：\n訂單編號：${orderId}\n項目：\n${itemsStr}\n總計：NT$ ${total.toLocaleString()}`;
+    const message = `您好，我想結帳以下購物車商品：\n\n【訂單編號】${orderId}\n【購買項目】\n${itemsStr}\n\n【總計金額】NT$ ${total.toLocaleString()}`;
     const lineUrl = `https://line.me/R/oaMessage/@FUUvJlG/?${encodeURIComponent(message)}`;
     window.open(lineUrl, '_blank');
     setCart([]);
@@ -502,16 +502,7 @@ export default function App() {
             lang={lang}
           />
 
-          {confirmedOrder && (
-            <OrderConfirmationModal 
-              isOpen={!!confirmedOrder}
-              onClose={() => setConfirmedOrder(null)}
-              orderId={confirmedOrder.orderId}
-              product={confirmedOrder.product}
-              lang={lang}
-              onConfirm={handleFinalConfirm}
-            />
-          )}
+
 
           <AdminPanel 
             isOpen={isAdminOpen} 
