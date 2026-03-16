@@ -5,6 +5,7 @@ import { Product, Category, Wood, Language, Order } from '../types';
 import { I18N } from '../constants';
 import { saveToGitHub } from '../services/github';
 import { ImageUploader } from './ImageUploader';
+import { isMobile } from 'react-device-detect';
 
 type Notification = {
   message: string;
@@ -420,6 +421,11 @@ export function AdminPanel({
         animate={{ opacity: 1, scale: 1 }}
         className="bg-brand-white w-full max-w-6xl h-[90vh] flex flex-col shadow-2xl overflow-hidden relative z-[201] border border-brand-black"
       >
+        {isMobile && (
+          <div className="bg-red-500 text-white text-center p-2 font-mono text-[10px] uppercase tracking-widest shrink-0">
+            Warning: The Admin Panel is optimized for Desktop. Forms and drag-and-drop may misbehave on mobile.
+          </div>
+        )}
         {!isLoggedIn ? (
           <div className="flex-1 flex flex-col items-center justify-center p-8">
             <h2 className="font-editorial text-4xl uppercase mb-8">Admin Login</h2>

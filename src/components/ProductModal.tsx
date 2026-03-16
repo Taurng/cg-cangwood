@@ -3,6 +3,7 @@ import { X, ShoppingCart, CreditCard, Landmark, Wallet } from "lucide-react";
 import { Product, Language } from "../types";
 import { I18N } from "../constants";
 import { useState, useRef } from "react";
+import { isMobile } from 'react-device-detect';
 
 type ProductModalProps = {
   product: Product | null;
@@ -43,17 +44,24 @@ export function ProductModal({ product, isOpen, onClose, lang, onCheckout, onAdd
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 50 }}
             transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-            className="bg-brand-white w-full max-w-7xl h-[90vh] md:h-[85vh] flex flex-col md:flex-row shadow-2xl overflow-hidden relative z-[101]"
+            className={`bg-brand-white w-full max-w-7xl relative z-[101] shadow-2xl flex ${
+              isMobile ? 'flex-col h-[100dvh] overflow-y-auto' : 'flex-row h-[85vh] overflow-hidden rounded-xl'
+            }`}
           >
-            <div className="w-full md:w-[60%] h-[40%] md:h-full flex flex-col border-b md:border-b-0 md:border-r border-brand-black/10">
+            {/* Image Gallery Side */}
+            <div className={`w-full flex flex-col border-brand-black/10 ${
+              isMobile ? 'h-[50dvh] flex-shrink-0 border-b' : 'md:w-[60%] h-full border-r'
+            }`}>
               <div 
                 ref={containerRef}
-                className={`w-full h-full md:h-[85%] relative bg-[#f4f4f5] overflow-hidden ${isZoomed ? 'cursor-grab active:cursor-grabbing' : 'cursor-zoom-in'}`}
+                className={`w-full relative bg-[#f4f4f5] overflow-hidden ${
+                  isMobile ? 'h-full' : 'h-[85%]'
+                } ${isZoomed ? 'cursor-grab active:cursor-grabbing' : 'cursor-zoom-in'}`}
               >
                 <motion.img 
                   key={activeImage}
                   src={product.images[activeImage]} 
-                  className={`w-full h-full select-none ${isZoomed ? 'object-cover' : 'object-contain p-8 md:p-16'}`} 
+                  className={`w-full h-full select-none ${isZoomed ? 'object-cover' : (isMobile ? 'object-contain p-6' : 'object-contain p-16')}`} 
                   alt={product.name_zh}
                   referrerPolicy="no-referrer"
                   animate={{ 
@@ -72,7 +80,9 @@ export function ProductModal({ product, isOpen, onClose, lang, onCheckout, onAdd
                 )}
               </div>
               {product.images.length > 1 && (
-                <div className="w-full h-[15%] border-t border-brand-black/10 flex p-6 gap-6 overflow-x-auto items-center bg-brand-white">
+                <div className={`w-full border-t border-brand-black/10 flex p-4 gap-4 overflow-x-auto items-center bg-brand-white flex-shrink-0 ${
+                  isMobile ? 'h-[100px]' : 'h-[15%]'
+                }`}>
                   {product.images.map((img, i) => (
                     <button 
                       key={i} 
@@ -80,7 +90,7 @@ export function ProductModal({ product, isOpen, onClose, lang, onCheckout, onAdd
                         setActiveImage(i);
                         setIsZoomed(false);
                       }}
-                      className={`w-20 h-20 flex-shrink-0 border transition-all duration-300 ${activeImage === i ? 'border-brand-black scale-105' : 'border-transparent opacity-30 hover:opacity-100'}`}
+                      className={`w-16 h-16 md:w-20 md:h-20 flex-shrink-0 border transition-all duration-300 ${activeImage === i ? 'border-brand-black scale-105' : 'border-transparent opacity-30 hover:opacity-100'}`}
                     >
                       <img src={img} className="w-full h-full object-cover" alt="" referrerPolicy="no-referrer" />
                     </button>
@@ -89,26 +99,29 @@ export function ProductModal({ product, isOpen, onClose, lang, onCheckout, onAdd
               )}
             </div>
 
-            <div className="w-full md:w-[40%] p-8 md:p-20 flex flex-col justify-between overflow-y-auto bg-brand-white h-[60%] md:h-full relative">
-              <div className="absolute top-8 right-8">
+            {/* Content Side */}
+            <div className={`w-full bg-brand-white relative ${
+              isMobile ? 'h-auto p-6 pb-24 flex-shrink-0' : 'md:w-[40%] h-full flex flex-col justify-between overflow-y-auto p-12 lg:p-16'
+            }`}>
+              <div className={`absolute z-10 ${isMobile ? 'top-4 right-4 bg-white/80 backdrop-blur rounded-full shadow-sm' : 'top-8 right-8'}`}>
                 <button onClick={handleClose} className="hover:rotate-90 transition-transform p-2 group">
-                  <X className="w-8 h-8 group-hover:scale-110 transition-transform" />
+                  <X className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8 group-hover:scale-110 transition-transform'}`} />
                 </button>
               </div>
 
-              <div className="space-y-12">
+              <div className={`space-y-10 ${isMobile ? 'mt-4' : 'mt-0'}`}>
                 <div>
-                  <div className="flex items-center gap-4 mb-8">
+                  <div className="flex items-center gap-4 mb-6 md:mb-8">
                     <span className="font-mono text-[10px] uppercase tracking-widest text-brand-gray">Category</span>
                     <div className="h-[1px] flex-grow bg-brand-black/10" />
                     <span className="font-mono text-[10px] uppercase tracking-widest font-bold">
                       {lang === 'zh' ? product.type_zh : product.type_en}
                     </span>
                   </div>
-                  <h2 className="font-editorial text-5xl md:text-7xl uppercase tracking-tighter leading-none mb-6">
+                  <h2 className="font-editorial text-4xl md:text-6xl uppercase tracking-tighter leading-none mb-4 md:mb-6 pr-12">
                     {lang === 'zh' ? product.name_zh : product.name_en}
                   </h2>
-                  <p className="font-mono text-2xl md:text-3xl tracking-tight mb-12">
+                  <p className="font-mono text-xl md:text-2xl tracking-tight mb-8 md:mb-12">
                     NT$ {product.price.toLocaleString()}
                   </p>
                 </div>
@@ -132,18 +145,18 @@ export function ProductModal({ product, isOpen, onClose, lang, onCheckout, onAdd
                 </div>
               </div>
               
-              <div className="flex flex-col gap-4 mt-12">
+              <div className={`flex flex-col gap-4 ${isMobile ? 'mt-8' : 'mt-auto pt-10'}`}>
                 <div className="flex gap-4">
                   <button 
                     onClick={onAddToCart}
-                    className="flex-1 border border-brand-black py-6 font-mono text-xs uppercase tracking-[0.3em] hover:bg-brand-black hover:text-brand-white transition-all flex items-center justify-center gap-3"
+                    className="flex-1 border border-brand-black py-4 md:py-6 font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-brand-black hover:text-brand-white transition-all flex items-center justify-center gap-2 md:gap-3"
                   >
                     <ShoppingCart className="w-4 h-4" />
                     <span>{t.cart_add}</span>
                   </button>
                   <button 
                     onClick={onCheckout}
-                    className="flex-1 bg-brand-black text-brand-white py-6 font-mono text-xs uppercase tracking-[0.3em] hover:bg-brand-darkgray transition-all flex items-center justify-center gap-4 group"
+                    className="flex-1 bg-brand-black text-brand-white py-4 md:py-6 font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-brand-darkgray transition-all flex items-center justify-center gap-2 md:gap-4 group"
                   >
                     <span>{t.btn_shop_now}</span>
                     <span className="group-hover:translate-x-2 transition-transform">→</span>

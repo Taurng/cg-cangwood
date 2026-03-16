@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { motion } from 'motion/react';
 import { Language } from '../types';
 import { I18N } from '../constants';
+import { isMobile } from 'react-device-detect';
 
 type HeroProps = {
   lang: Language;
@@ -44,7 +45,7 @@ export function Hero({ lang, setView, images }: HeroProps) {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-editorial text-[15vw] lg:text-[12vw] leading-[0.85] uppercase tracking-tighter"
+              className={`font-editorial ${isMobile ? 'text-[22vw]' : 'text-[15vw] lg:text-[12vw]'} leading-[0.85] uppercase tracking-tighter`}
               dangerouslySetInnerHTML={{ __html: t.hero_title }}
             />
           </div>
@@ -54,7 +55,7 @@ export function Hero({ lang, setView, images }: HeroProps) {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 1 }}
-              className="aspect-square w-full max-w-[300px] bg-brand-black/5 rounded-full flex items-center justify-center relative group cursor-pointer overflow-hidden mb-12"
+              className={`aspect-square w-full ${isMobile ? 'max-w-[200px] mt-8' : 'max-w-[300px]'} bg-brand-black/5 rounded-full flex items-center justify-center relative group cursor-pointer overflow-hidden mb-12`}
               onClick={() => setView('shop')}
             >
               <div className="absolute inset-0 border border-brand-black/10 rounded-full scale-90 group-hover:scale-100 transition-transform duration-700" />
