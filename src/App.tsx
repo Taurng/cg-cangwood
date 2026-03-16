@@ -173,8 +173,14 @@ export default function App() {
       `您好，我想購買此商品並進行付款：\n\n【訂單編號】${orderId}\n【產品編號】${product.id}\n【產品名稱】${product.name_zh}\n【總計金額】NT$ ${product.price.toLocaleString()}` :
       `Hello, I would like to purchase this item and proceed with payment:\n\n[Order ID] ${orderId}\n[Product ID] ${product.id}\n[Product Name] ${product.name_en}\n[Total Amount] NT$ ${product.price.toLocaleString()}`
     );
-    const lineUrl = `https://line.me/R/oaMessage/@FUUvJlG/?${encodeURIComponent(message)}`;
-    window.open(lineUrl, '_blank');
+    
+    navigator.clipboard.writeText(message).then(() => {
+      alert(lang === 'zh' ? '訂單資訊已複製！即將為您導向至 LINE，請直接「貼上」並傳送！' : 'Order details copied! Redirecting to LINE, please "paste" and send!');
+      window.open('https://lin.ee/Bh3jlCs', '_blank');
+    }).catch(() => {
+      window.open('https://lin.ee/Bh3jlCs', '_blank');
+    });
+    
     setSelectedProduct(null);
   };
 
@@ -223,8 +229,14 @@ export default function App() {
 
     const itemsStr = cart.map(item => `${item.product.name_zh} x ${item.quantity}`).join('\n');
     const message = `您好，我想結帳以下購物車商品：\n\n【訂單編號】${orderId}\n【購買項目】\n${itemsStr}\n\n【總計金額】NT$ ${total.toLocaleString()}`;
-    const lineUrl = `https://line.me/R/oaMessage/@FUUvJlG/?${encodeURIComponent(message)}`;
-    window.open(lineUrl, '_blank');
+    
+    navigator.clipboard.writeText(message).then(() => {
+      alert(lang === 'zh' ? '訂單資訊已複製！即將為您導向至 LINE，請直接「貼上」並傳送！' : 'Order details copied! Redirecting to LINE, please "paste" and send!');
+      window.open('https://lin.ee/Bh3jlCs', '_blank');
+    }).catch(() => {
+      window.open('https://lin.ee/Bh3jlCs', '_blank');
+    });
+
     setCart([]);
     setIsCartOpen(false);
   };
