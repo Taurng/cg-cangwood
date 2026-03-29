@@ -7,28 +7,43 @@
       "name_en": "Aesthetic Donut Lamp Table",
       "type_zh": "黑胡桃木、黃銅、茶色玻璃",
       "type_en": "Black Walnut",
-      "price": 12000,
+      "price": 16000,
       "desc_zh": "選用北美黑胡桃木，保留自然邊緣。幾何桌腳設計，結合現代力學與傳統榫接。",
       "desc_en": "North American Black Walnut with natural edges. Geometric leg design.",
       "stock": "custom",
+      "images": []
+    },
+    {
+      "id": 6,
+      "categoryId": "cat_chair",
+      "name_zh": "極簡長凳",
+      "name_en": "Minimal Bench",
+      "type_zh": "橡木",
+      "type_en": "Oak",
+      "price": 45000,
+      "desc_zh": "多功能長凳，可用於玄關穿鞋或餐桌配椅。",
+      "desc_en": "Multi-functional bench.",
+      "stock": "custom",
       "images": [
-        "https://images.unsplash.com/photo-1611269154421-4e27233eb485?q=80&w=2544&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1577140917170-285929fb55b7?q=80&w=2000&auto=format&fit=crop"
+        "https://images.unsplash.com/photo-1556702120-c8cb240974b6?q=80&w=2487&auto=format&fit=crop"
       ]
     },
     {
       "id": 3,
-      "categoryId": "cat_chair",
-      "name_zh": "長椅",
-      "name_en": "Dining Bench",
-      "type_zh": "黑胡桃木",
-      "type_en": "Cherry Wood",
-      "price": 35000,
-      "desc_zh": "隨著時間推移顏色會逐漸變深的櫻桃木，配有黃銅把手。",
-      "desc_en": "Cherry wood that darkens over time.",
-      "stock": "custom",
+      "categoryId": "cat_decor",
+      "name_zh": "奇鵝",
+      "name_en": "cí é",
+      "type_zh": "黑胡桃木、栓木",
+      "type_en": "Ash、Black Walnut",
+      "price": 1000,
+      "desc_zh": "他的出生就是要讓空間多出一個新的風格和違和感，長相特別有趣是生長環境不同就像每個人一樣。",
+      "desc_en": "He was born to give the space a new style and sense of incongruity, and his appearance is particularly interesting because he grew up in a different environment, just like everyone.",
+      "stock": "instock",
       "images": [
-        "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=2487&auto=format&fit=crop"
+        "https://raw.githubusercontent.com/Taurng/cg-cangwood/main/public/uploads/img_1774795701062_clean_Gemini_Generated_Image_am04kdam04kdam04.jpg",
+        "https://raw.githubusercontent.com/Taurng/cg-cangwood/main/public/uploads/img_1774795683079_clean_Gemini_Generated_Image_5drcfc5drcfc5drc.jpg",
+        "https://raw.githubusercontent.com/Taurng/cg-cangwood/main/public/uploads/img_1774795706025_clean_Gemini_Generated_Image_u26e9ru26e9ru26e.jpg",
+        "https://raw.githubusercontent.com/Taurng/cg-cangwood/main/public/uploads/img_1774795687400_clean_Gemini_Generated_Image_ydzb4ydzb4ydzb4y.jpg"
       ]
     },
     {
@@ -47,19 +62,19 @@
       ]
     },
     {
-      "id": 6,
-      "categoryId": "cat_chair",
-      "name_zh": "極簡長凳",
-      "name_en": "Minimal Bench",
-      "type_zh": "橡木",
-      "type_en": "Oak",
-      "price": 45000,
-      "desc_zh": "多功能長凳，可用於玄關穿鞋或餐桌配椅。",
-      "desc_en": "Multi-functional bench.",
-      "stock": "custom",
       "images": [
-        "https://images.unsplash.com/photo-1556702120-c8cb240974b6?q=80&w=2487&auto=format&fit=crop"
-      ]
+        "https://raw.githubusercontent.com/Taurng/cg-cangwood/main/public/uploads/img_1774796250350_Gemini_Generated_Image_2cecss2cecss2cec.jpg",
+        "https://raw.githubusercontent.com/Taurng/cg-cangwood/main/public/uploads/img_1774796256328_clean_Gemini_Generated_Image_hkv7nwhkv7nwhkv7.jpg"
+      ],
+      "stock": "custom",
+      "name_zh": "單枚古幣展示架",
+      "name_en": "Single antique coin display",
+      "categoryId": "Collectibles display stand",
+      "price": 6200,
+      "type_zh": "黑胡桃木",
+      "desc_zh": "參考希臘柱式和建築而製作這座展示架，如收藏家所收藏的古幣想展示，又想展示架要和他的風格相關風格，可以找我訂製喔。",
+      "desc_en": "If you want to display the ancient coins collected by the collector, and want the display frame to be related to his style, you can ask me to customize it.",
+      "id": 7
     }
   ],
   "woods": [
@@ -162,6 +177,12 @@
       "parentId": "cat_ornament",
       "name_zh": "器皿系列",
       "name_en": "Utensils"
+    },
+    {
+      "name_zh": "收藏品展示架",
+      "name_en": "Collectibles display stand",
+      "id": "Collectibles display stand",
+      "parentId": "cat_furniture"
     }
   ],
   "i18nData": {
